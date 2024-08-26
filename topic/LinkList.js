@@ -4,6 +4,7 @@ class Node {
     this.next = null;
   }
 }
+
 export class LinkedList {
   constructor() {
     this.head = null;
@@ -11,6 +12,7 @@ export class LinkedList {
     this.length = 0; // Added a length property to optimize size calculation
   }
   // Append: Insert a new node at the end of the linked list
+
   append(data) {
     // Big O: O(1)
     const newNode = new Node(data);
@@ -69,22 +71,17 @@ export class LinkedList {
   //   Big O: O(n)
 
   contains(data) {
-    let current = this.head;
-    while (current !== null) {
-      if (current.data === data) {
-        return true;
-      }
-      current = current.next;
-    }
-    return false;
+    return this.indexOf(data) !== -1;
   }
   //   indexOf(data): Returns the index of the first occurrence of data in the list, or -1 if not found.
   //   Big O: O(n)
-
+  isEmpty() {
+    return this.head !== null;
+  }
   indexOf(data) {
     let current = this.head;
     let index = 0;
-    while (current !== null) {
+    while (this.isEmpty()) {
       if (current.data === data) {
         return index;
       }
@@ -97,6 +94,19 @@ export class LinkedList {
   // O(1)
   size() {
     return this.length;
+  }
+
+  removeFirst() {
+    if (this.isEmpty()) throw new Error("the list is empty");
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+      return;
+    }
+    const second = this.head.next;
+    this.head.next = null;
+    this.head = second;
   }
 
   // ToArray: Convert the linked list to an array

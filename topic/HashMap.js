@@ -24,3 +24,15 @@ console.log({ map });
 for (const [key, value] of map.entries()) {
   console.log(`key=${key} value=${value}`);
 }
+
+Array.prototype.myMap = function (callback) {
+  const resultArray = [];
+  for (let index = 0; index < this.length; index++) {
+    resultArray.push(callback(this[index], index, this));
+  }
+  return resultArray;
+};
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.myMap((number) => number * 2);
+
+console.log(doubled); // Output: [2, 4, 6, 8]
